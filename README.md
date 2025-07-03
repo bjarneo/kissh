@@ -1,20 +1,18 @@
-# .kissh - Keep It Simple, Stupid.sh
+# .kissh
 
-.kissh is a simple, opinionated, and lightweight framework for your Bash environment. It's for those who want a faster, more organized shell without the bloat of larger frameworks. It provides a solid foundation for your Bash configuration, not a mountain of features you'll never use.
+**Keep It Simple, Stupid.sh**
 
-## What is .kissh?
+A simple, opinionated, and lightweight framework for your Bash environment. .kissh provides a clean structure to organize your aliases, functions, and plugins without the bloat of larger frameworks. It's for those who want a faster, more organized shell that's easy to understand and maintain.
 
-This isn't another "Oh My" framework with hundreds of plugins and themes. .kissh is an architectural pattern for your `~/.bashrc`. It gives you a clean structure to organize your aliases, functions, and visual tweaks while keeping startup times fast and your configuration files readable.
-
-It is opinionated. It makes choices for you based on what is considered modern best practice, such as using `PROMPT_COMMAND` for prompt rendering. The goal is to give you a powerful, beautiful, and robust setup right out of the box with minimal fiddling.
+The core philosophy is **readability over abstraction**. You should be able to read the source code of your shell framework and know exactly what it's doing.
 
 ## Features
 
-- **Simple by Design**: A minimal core that's easy to understand and extend. No magic.
 - **Fast Startup**: No noticeable lag when opening a new terminal.
-- **Modular Structure**: A clean `~/.kissh` directory to organize your shell customizations into logical `plugins` and `themes`.
-- **Sensible Defaults**: Comes with a pre-configured, visually pleasing default theme.
-- **Easy Customization**: Designed to be forked, tweaked, and made your own.
+- **Modular by Design**: A clean `~/.kissh` directory to organize your shell customizations.
+- **Simple Structure**: Separate directories for aliases, functions, plugins, and themes.
+- **Easy to Customize**: Designed to be forked, tweaked, and made your own.
+- **Sensible Defaults**: A powerful and visually pleasing setup out of the box.
 
 ## Installation
 
@@ -28,7 +26,8 @@ It is opinionated. It makes choices for you based on what is considered modern b
 
     ```bash
     # Load .kissh - Keep It Simple, Stupid.sh
-    export KISSH_THEME="dothash" # or "fancy", "simple"
+    # Set the theme you want to use. Themes are in ~/.kissh/themes/
+    export KISSH_THEME="dothash"
     if [ -f ~/.kissh/kissh.sh ]; then
       source ~/.kissh/kissh.sh
     fi
@@ -42,113 +41,87 @@ It is opinionated. It makes choices for you based on what is considered modern b
 
     Or simply open a new terminal window.
 
-## Usage
-
-The framework is structured into several directories to keep your environment organized:
-
--   **`aliases/`**: Holds all your alias definitions. Each `.sh` file in this directory is sourced automatically. You can group your aliases by topic (e.g., `git.sh`, `docker.sh`).
--   **`functions/`**: Similar to aliases, this is for your shell functions. Each `.sh` file is sourced.
--   **`plugins/`**: For more complex scripts or configurations. These are `*.plugin.sh` files that can set environment variables, configure tools, or do anything more involved than a simple alias or function.
--   **`themes/`**: Contains different prompt themes. You can switch between them by setting the `KISSH_THEME` variable in your `.bashrc`.
-
 ## How It Works
 
-The core of `.kissh` is the main `kissh.sh` file, which acts as a loader. On startup, it does the following:
+The main `kissh.sh` script acts as a loader. On startup, it sources files from the `~/.kissh` directory in the following order:
 
-1.  Sources all `*.plugin.sh` files from `~/.kissh/plugins/`.
-2.  Sources all `*.sh` files from `~/.kissh/aliases/`.
-3.  Sources all `*.sh` files from `~/.kissh/functions/`.
-4.  Loads the theme specified by the `$KISSH_THEME` environment variable from the `~/.kissh/themes/` directory.
+1. **Plugins**: All `*.plugin.sh` files in `~/.kissh/plugins/`.
+2. **Aliases**: All `*.sh` files in `~/.kissh/aliases/`.
+3. **Functions**: All `*.sh` files in `~/.kissh/functions/`.
+4. **Theme**: The theme specified by `$KISSH_THEME` from `~/.kissh/themes/`.
 
-The structure looks like this:
+Files in each directory are loaded in alphabetical order.
 
 ```
 ~/.kissh/
 ├── kissh.sh              # The main script that loads everything
-├── aliases/              # All your shell aliases
-│   ├── git.sh
-│   └── kubectl.sh
-├── functions/            # All your shell functions
-│   ├── git.sh
-│   └── kubectl.sh
-├── plugins/              # Scripts for configuration and setup
-│   ├── colors.plugin.sh
-│   └── fzf.plugin.sh
-└── themes/               # Prompt themes
-    ├── dothash.theme.sh
-    └── clean.theme.sh
+├── aliases/              # Shell aliases (*.sh)
+├── functions/            # Shell functions (*.sh)
+├── plugins/              # Setup scripts & configurations (*.plugin.sh)
+└── themes/               # Prompt themes (*.theme.sh)
 ```
-
-Files in `aliases`, `functions`, and `plugins` are loaded in alphabetical order.
 
 ## Customization
 
-Making `.kissh` your own is simple.
+Making `.kissh` your own is straightforward. Just add files to the appropriate directories.
 
-### Adding Your Own Aliases
+### Aliases
 
-1.  Create a new file in the `~/.kissh/aliases/` directory (e.g., `personal.sh`).
-2.  Add your aliases to this file.
+Create any `.sh` file in `~/.kissh/aliases/`.
 
-**Example: `~/.kissh/aliases/personal.sh`**
+**Example: `~/.kissh/aliases/common.sh`**
 
 ```bash
-# Personal Aliases
-alias ls='eza --icons'
+alias ls='eza --icons' # Requires eza
+alias ll='eza --icons -l'
 alias c='clear'
 alias ..='cd ..'
 ```
 
-### Adding Your Own Functions
+### Functions
 
-1.  Create a new file in the `~/.kissh/functions/` directory (e.g., `utils.sh`).
-2.  Add your functions to this file.
+Create any `.sh` file in `~/.kissh/functions/`.
 
 **Example: `~/.kissh/functions/utils.sh`**
 
 ```bash
-# Greeting function
+# A simple greeting
 function hello() {
   echo "Hello, $(whoami)!"
 }
+
+# Create a directory and cd into it
+function mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
 ```
 
-### Adding a Plugin
+### Plugins
 
-If you need to set environment variables or run setup scripts, a plugin is the right place.
-
-1.  Create a file ending in `.plugin.sh` in the `~/.kissh/plugins/` directory.
-2.  Add your script logic.
+Plugins are for more complex logic, like setting environment variables or configuring tools. Create any `*.plugin.sh` file in `~/.kissh/plugins/`.
 
 **Example: `~/.kissh/plugins/node.plugin.sh`**
 
 ```bash
-# Add ~/.local/bin to the PATH
+# Add local binaries to the PATH
 export PATH="$HOME/.local/bin:$PATH"
 
-# Setup NVM
+# Setup NVM (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  source "$NVM_DIR/nvm.sh"
+fi
 ```
 
-### Customizing the Theme
+### Themes
 
-You can edit any of the existing themes in the `~/.kissh/themes/` directory. The active theme is determined by the `$KISSH_THEME` variable in your `.bashrc`.
+The active theme is determined by the `$KISSH_THEME` variable in your `.bashrc`. To create a new theme:
 
-To create a new theme:
-
-1.  Copy an existing theme file to a new name, e.g., `cp ~/.kissh/themes/clean.theme.sh ~/.kissh/themes/mytheme.theme.sh`.
-2.  Customize `~/.kissh/themes/mytheme.theme.sh` to your liking.
-3.  Change `export KISSH_THEME="mytheme"` in your `.bashrc`.
-
-## Philosophy
-
-The "Keep It Simple, Stupid" principle is the guiding force behind this project.
-
-- **Readability over Abstraction**: You should be able to read the source code of your shell framework and understand what it's doing.
-- **You're in Control**: .kissh provides a structure, not a cage. There are no complex update scripts or hidden behaviors. Your `~/.kissh` directory is yours to manage as you see fit.
-- **Opinionated means Strong Defaults**: The default configuration is not meant to be a neutral starting point, but a fully usable and powerful environment from the very first launch.
+1. Copy an existing theme from `~/.kissh/themes/` to a new file (e.g., `mytheme.theme.sh`).
+2. Customize the new file to your liking. It's just a shell script that sets the `PS1` variable and related functions.
+3. Update the `export KISSH_THEME="mytheme"` line in your `.bashrc`.
 
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
