@@ -1,25 +1,3 @@
-#!/bin/bash
-
-# ===================================================================
-# Docker Aliases and Functions
-# ===================================================================
-
-# -------------------------------------------------------------------
-# 1. ALIASES
-# -------------------------------------------------------------------
-
-alias d='docker'
-alias dc='docker-compose'
-alias di='docker images'
-alias dps='docker ps'
-alias dpsa='docker ps -a'
-alias dlogs='docker logs'
-alias dlogsf='docker logs -f'
-
-# -------------------------------------------------------------------
-# 2. FUNCTIONS
-# -------------------------------------------------------------------
-
 # Stop and remove all containers
 dclean-containers() {
   echo "Stopping and removing all containers..."

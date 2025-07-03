@@ -1,0 +1,7 @@
+alias d='docker'
+alias dc='docker-compose'
+alias di='docker images'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias dlogs='docker logs'
+alias dlogsf='docker logs -f'
