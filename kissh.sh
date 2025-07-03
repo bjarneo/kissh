@@ -9,12 +9,6 @@ for plugin in ~/.kissh/plugins/*.sh; do
     source "$plugin"
   fi
 done
-
-# Source environment variables if the file exists
-if [ -f ~/.env_vars.sh ]; then
-  source ~/.env_vars.sh
-fi
-
 # Load all aliases
 for alias in ~/.kissh/aliases/*.sh; do
   if [ -f "$alias" ]; then
@@ -32,6 +26,11 @@ done
 # Load the selected prompt
 if [ -n "$KISSH_PROMPT" ] && [ -f "$KISSH/prompts/$KISSH_PROMPT.sh" ]; then
   source "$KISSH/prompts/$KISSH_PROMPT.sh"
+fi
+
+# Source environment variables if the file exists
+if [ -f ~/.env_vars.sh ]; then
+  source ~/.env_vars.sh
 fi
 
 # Editor used by CLI
