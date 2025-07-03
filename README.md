@@ -69,8 +69,8 @@ Files in each directory are loaded in alphabetical order.
 ├── kissh.sh              # The main script that loads everything
 ├── aliases/              # Shell aliases (*.sh)
 ├── functions/            # Shell functions (*.sh)
-├── plugins/              # Setup scripts & configurations (*.plugin.sh)
-└── prompts/              # Prompts (*.prompt.sh)
+├── plugins/              # Setup scripts & configurations (*.sh)
+└── prompts/              # Prompts (*.sh)
 ```
 
 ### Environment Variables
@@ -126,9 +126,9 @@ function mkcd() {
 
 ### Plugins
 
-Plugins are for more complex logic, like setting environment variables or configuring tools. Create any `*.plugin.sh` file in `~/.kissh/plugins/`.
+Plugins are for more complex logic, like setting environment variables or configuring tools. Create any `*.sh` file in `~/.kissh/plugins/`.
 
-**Example: `~/.kissh/plugins/node.plugin.sh`**
+**Example: `~/.kissh/plugins/node.sh`**
 
 ```bash
 # Add local binaries to the PATH
@@ -145,7 +145,7 @@ fi
 
 The active prompt is determined by the `$KISSH_PROMPT` variable in your `.bashrc`. To create a new prompt:
 
-1. Copy an existing prompt from `~/.kissh/prompts/` to a new file (e.g., `myprompt.prompt.sh`).
+1. Copy an existing prompt from `~/.kissh/prompts/` to a new file (e.g., `myprompt.sh`).
 2. Customize the new file to your liking. It's just a shell script that sets the `PS1` variable and related functions.
 3. Update the `export KISSH_PROMPT="myprompt"` line in your `.bashrc`.
 
@@ -166,4 +166,3 @@ After creating the file, you can edit `~/.dircolors` to customize the `LS_COLORS
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
