@@ -89,6 +89,10 @@ export AWS_SECRET_ACCESS_KEY="your_aws_secret"
 
 Make sure to add `.env_vars.sh` to your global `.gitignore` file to prevent accidentally committing it.
 
+## Documentation
+
+For a full list of available aliases and functions, see the [WIKI.md](WIKI.md) file.
+
 ## Customization
 
 Making `.kissh` your own is straightforward. Just add files to the appropriate directories.
