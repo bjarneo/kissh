@@ -10,6 +10,11 @@ for plugin in ~/.kissh/plugins/*.plugin.sh; do
   fi
 done
 
+# Source environment variables if the file exists
+if [ -f ~/.env_vars.sh ]; then
+  source ~/.env_vars.sh
+fi
+
 # Load all aliases
 for alias in ~/.kissh/aliases/*.sh; do
   if [ -f "$alias" ]; then

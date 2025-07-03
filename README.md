@@ -72,6 +72,22 @@ Files in each directory are loaded in alphabetical order.
 └── prompts/              # Prompts (*.prompt.sh)
 ```
 
+### Environment Variables
+
+If you need to set environment variables, especially secrets like API keys or tokens that you don't want to commit to a public repository, you can create a file named `.env_vars.sh` in your home directory (`~/.env_vars.sh`).
+
+`.kissh` will automatically source this file on startup if it exists. This allows you to keep your sensitive information separate from your shell configuration.
+
+**Example: `~/.env_vars.sh`**
+
+```bash
+export GITHUB_TOKEN="your_github_token"
+export AWS_ACCESS_KEY_ID="your_aws_key"
+export AWS_SECRET_ACCESS_KEY="your_aws_secret"
+```
+
+Make sure to add `.env_vars.sh` to your global `.gitignore` file to prevent accidentally committing it.
+
 ## Customization
 
 Making `.kissh` your own is straightforward. Just add files to the appropriate directories.
