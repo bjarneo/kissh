@@ -18,3 +18,6 @@ fi
 # Editor used by CLI
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
+
+# Autocompletion
+source /usr/share/bash-completion/bash_completion
