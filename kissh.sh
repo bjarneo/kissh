@@ -24,9 +24,9 @@ for func in ~/.kissh/functions/*.sh; do
   fi
 done
 
-# Load the selected theme
-if [ -n "$KISSH_THEME" ] && [ -f "$KISSH/themes/$KISSH_THEME.theme.sh" ]; then
-  source "$KISSH/themes/$KISSH_THEME.theme.sh"
+# Load the selected prompt
+if [ -n "$KISSH_PROMPT" ] && [ -f "$KISSH/prompts/$KISSH_PROMPT.sh" ]; then
+  source "$KISSH/prompts/$KISSH_PROMPT.sh"
 fi
 
 # Editor used by CLI
