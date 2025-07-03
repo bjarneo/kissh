@@ -10,7 +10,7 @@ The core philosophy is **readability over abstraction**. You should be able to r
 
 - **Fast Startup**: No noticeable lag when opening a new terminal.
 - **Modular by Design**: A clean `~/.kissh` directory to organize your shell customizations.
-- **Simple Structure**: Separate directories for aliases, functions, plugins, and themes.
+- **Simple Structure**: Separate directories for aliases, functions, plugins, and prompts.
 - **Easy to Customize**: Designed to be forked, tweaked, and made your own.
 - **Sensible Defaults**: A powerful and visually pleasing setup out of the box.
 
@@ -37,8 +37,8 @@ These tools are **optional**. If you don't have them installed, the correspondin
 
    ```bash
    # Load .kissh - Keep It Simple, Stupid.sh
-   # Set the theme you want to use. Themes are in ~/.kissh/themes/
-   export KISSH_THEME="dothash"
+   # Set the prompt you want to use. Prompts are in ~/.kissh/prompts/
+   export KISSH_PROMPT="dothash"
    if [ -f ~/.kissh/kissh.sh ]; then
      source ~/.kissh/kissh.sh
    fi
@@ -59,7 +59,7 @@ The main `kissh.sh` script acts as a loader. On startup, it sources files from t
 1. **Plugins**: All `*.plugin.sh` files in `~/.kissh/plugins/`.
 2. **Aliases**: All `*.sh` files in `~/.kissh/aliases/`.
 3. **Functions**: All `*.sh` files in `~/.kissh/functions/`.
-4. **Theme**: The theme specified by `$KISSH_THEME` from `~/.kissh/themes/`.
+4. **Prompt**: The prompt specified by `$KISSH_PROMPT` from `~/.kissh/prompts/`.
 
 Files in each directory are loaded in alphabetical order.
 
@@ -69,7 +69,7 @@ Files in each directory are loaded in alphabetical order.
 ├── aliases/              # Shell aliases (*.sh)
 ├── functions/            # Shell functions (*.sh)
 ├── plugins/              # Setup scripts & configurations (*.plugin.sh)
-└── themes/               # Prompt themes (*.theme.sh)
+└── prompts/              # Prompts (*.prompt.sh)
 ```
 
 ## Customization
@@ -124,13 +124,13 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
 fi
 ```
 
-### Themes
+### Prompts
 
-The active theme is determined by the `$KISSH_THEME` variable in your `.bashrc`. To create a new theme:
+The active prompt is determined by the `$KISSH_PROMPT` variable in your `.bashrc`. To create a new prompt:
 
-1. Copy an existing theme from `~/.kissh/themes/` to a new file (e.g., `mytheme.theme.sh`).
+1. Copy an existing prompt from `~/.kissh/prompts/` to a new file (e.g., `myprompt.prompt.sh`).
 2. Customize the new file to your liking. It's just a shell script that sets the `PS1` variable and related functions.
-3. Update the `export KISSH_THEME="mytheme"` line in your `.bashrc`.
+3. Update the `export KISSH_PROMPT="myprompt"` line in your `.bashrc`.
 
 ## License
 
