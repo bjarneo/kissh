@@ -132,6 +132,21 @@ The active prompt is determined by the `$KISSH_PROMPT` variable in your `.bashrc
 2. Customize the new file to your liking. It's just a shell script that sets the `PS1` variable and related functions.
 3. Update the `export KISSH_PROMPT="myprompt"` line in your `.bashrc`.
 
+### Directory Colors
+
+To customize the colors used for directory listings (`ls`, `eza`, etc.), you can add a `.dircolors` file to the root of your `$home` directory (`~/.dircolors`).
+
+If this file exists, `.kissh` will automatically source it on startup. By default, it will use the `LS_COLORS` environment variable to define colors for different file types and extensions.
+
+For customizations you can generate a default `.dircolors` file to get started:
+
+```bash
+dircolors --print-database > ~/.dircolors
+```
+
+After creating the file, you can edit `~/.dircolors` to customize the `LS_COLORS` environment variable to your liking. Changes will be applied the next time you open a new shell, or by running `source ~/.bashrc`.
+
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
