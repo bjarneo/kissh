@@ -14,32 +14,43 @@ The core philosophy is **readability over abstraction**. You should be able to r
 - **Easy to Customize**: Designed to be forked, tweaked, and made your own.
 - **Sensible Defaults**: A powerful and visually pleasing setup out of the box.
 
+## Prerequisites
+
+While `.kissh` is lightweight and has no mandatory dependencies, some of the included aliases and functions are designed to work with other popular command-line tools. To get the most out of the default configuration, consider installing the following:
+
+- **`git`**: For version control. Essential for the `git` aliases and functions.
+- **`docker`**: For container management. Powers the `docker` aliases and functions.
+- **`kubectl`**: For interacting with Kubernetes clusters. Used by the `kubectl` aliases and functions.
+- **`eza`**: A modern replacement for `ls`. The `ls` alias is mapped to `eza`.
+
+These tools are **optional**. If you don't have them installed, the corresponding aliases and functions will simply not work, but the rest of the framework will be unaffected.
+
 ## Installation
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/dothash/kissh.git ~/.kissh
-    ```
+   ```bash
+   git clone https://github.com/dothash/kissh.git ~/.kissh
+   ```
 
 2. **Source it from your `.bashrc`:** Add the following lines to the end of your `~/.bashrc` file.
 
-    ```bash
-    # Load .kissh - Keep It Simple, Stupid.sh
-    # Set the theme you want to use. Themes are in ~/.kissh/themes/
-    export KISSH_THEME="dothash"
-    if [ -f ~/.kissh/kissh.sh ]; then
-      source ~/.kissh/kissh.sh
-    fi
-    ```
+   ```bash
+   # Load .kissh - Keep It Simple, Stupid.sh
+   # Set the theme you want to use. Themes are in ~/.kissh/themes/
+   export KISSH_THEME="dothash"
+   if [ -f ~/.kissh/kissh.sh ]; then
+     source ~/.kissh/kissh.sh
+   fi
+   ```
 
 3. **Reload your shell:**
 
-    ```bash
-    source ~/.bashrc
-    ```
+   ```bash
+   source ~/.bashrc
+   ```
 
-    Or simply open a new terminal window.
+   Or simply open a new terminal window.
 
 ## How It Works
 
@@ -124,4 +135,3 @@ The active theme is determined by the `$KISSH_THEME` variable in your `.bashrc`.
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
