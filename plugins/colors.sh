@@ -1,6 +1,3 @@
-# Plugin: colors.plugin.sh
-# Enables and configures colors for ls, grep, etc.
-
 # First, set common aliases to enable color output
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'

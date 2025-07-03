@@ -4,7 +4,7 @@
 export KISSH=~/.kissh
 
 # Load all enabled plugins
-for plugin in ~/.kissh/plugins/*.plugin.sh; do
+for plugin in ~/.kissh/plugins/*.sh; do
   if [ -f "$plugin" ]; then
     source "$plugin"
   fi
