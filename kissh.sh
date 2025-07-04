@@ -37,5 +37,8 @@ fi
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 
-# Autocompletion
-source /usr/share/bash-completion/bash_completion
+# Auto Completion
+# macOS
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
+# Linux
+[ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
