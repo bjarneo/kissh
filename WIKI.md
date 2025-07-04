@@ -71,6 +71,13 @@ _These aliases are only available if `eza` is installed._
 - `pbcopy`: `xclip -selection clipboard`
 - `pbpaste`: `xclip -selection clipboard -o`
 
+### Zoxide
+
+_These aliases are only available if `zoxide` is installed._
+
+- `cd`: Change directory using `zoxide`.
+- `cdi`: Change directory using `zoxide` with an interactive prompt.
+
 ## Functions
 
 ### Docker

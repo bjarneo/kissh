@@ -22,7 +22,8 @@ While `.kissh` is lightweight and has no mandatory dependencies, some of the inc
 - **`docker`**: For container management. Powers the `docker` aliases and functions.
 - **`kubectl`**: For interacting with Kubernetes clusters. Used by the `kubectl` aliases and functions.
 - **`eza`**: A modern replacement for `ls`. The `ls` alias is mapped to `eza`.
-- **`mise`**: For managing tool versions. Used by the `mise` aliases and functions.
+- **`zoxide`**: A smarter `cd` command that helps you navigate your filesystem faster.
+- **`mise`**: For managing tool versions.
 
 These tools are **optional**. If you don't have them installed, the corresponding aliases and functions will simply not work, but the rest of the framework will be unaffected.
 
