@@ -1,4 +1,4 @@
-if command -v z &>/dev/null; then
+if command -v zoxide &>/dev/null; then
   if [ -n "$ZSH_VERSION" ]; then
     eval "$(zoxide init zsh)"
   else
