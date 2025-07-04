@@ -1,6 +1,6 @@
-# KiSSH Wiki
+# .kissh Wiki
 
-This document provides a reference for all the aliases and functions available in the KiSSH framework.
+This document provides a reference for all the aliases and functions available in the .kissh framework.
 
 ## Aliases
 
