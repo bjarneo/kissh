@@ -74,6 +74,13 @@ Files in each directory are loaded in alphabetical order.
 └── prompts/              # Prompts (*.sh)
 ```
 
+### `aliases`
+
+The `aliases` command helps you manage and discover your shell aliases.
+
+- **`aliases`**: List all available aliases.
+- **`aliases <search_term>`**: Search for aliases matching a specific term.
+
 ### Environment Variables
 
 If you need to set environment variables, especially secrets like API keys or tokens that you don't want to commit to a public repository, you can create a file named `.env_vars.sh` in your home directory (`~/.env_vars.sh`).
