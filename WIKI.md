@@ -17,8 +17,8 @@ This document provides a reference for all the aliases and functions available i
 - `di`: Alias for `docker images`.
 - `dps`: Alias for `docker ps`.
 - `dpsa`: Alias for `docker ps -a`.
-- `dlogs`: Alias for `docker logs`.
-- `dlogsf`: Alias for `docker logs -f`.
+- `dl`: Alias for `docker logs`.
+- `dlf`: Alias for `docker logs -f`.
 
 ### eza
 
