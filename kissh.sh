@@ -3,16 +3,13 @@
 # Path to your custom bash framework
 export KISSH=~/.kissh
 
+source aliases.sh
+source shell.sh
+
 # Load all enabled plugins
 for plugin in ~/.kissh/plugins/*.sh; do
   if [ -f "$plugin" ]; then
     source "$plugin"
-  fi
-done
-# Load all aliases
-for alias in ~/.kissh/aliases/*.sh; do
-  if [ -f "$alias" ]; then
-    source "$alias"
   fi
 done
 
@@ -36,9 +33,3 @@ fi
 # Editor used by CLI
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
-
-# Auto Completion
-# macOS
-[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-# Linux
-[ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
