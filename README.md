@@ -10,7 +10,7 @@ The core philosophy is **readability over abstraction**. You should be able to r
 
 - **Fast Startup**: No noticeable lag when opening a new terminal.
 - **Modular by Design**: A clean `~/.kissh` directory to organize your shell customizations.
-- **Simple Structure**: Separate directories for aliases, functions, plugins, and prompts.
+- **Simple Structure**: Separate directories for functions, plugins, and prompts.
 - **Easy to Customize**: Designed to be forked, tweaked, and made your own.
 - **Sensible Defaults**: A powerful and visually pleasing setup out of the box.
 
@@ -59,7 +59,7 @@ These tools are **optional**. If you don't have them installed, the correspondin
 The main `kissh.sh` script acts as a loader. On startup, it sources files from the `~/.kissh` directory in the following order:
 
 1. **Plugins**: All `*.plugin.sh` files in `~/.kissh/plugins/`.
-2. **Aliases**: All `*.sh` files in `~/.kissh/aliases/`.
+2. **Aliases**: Located in `~/.kissh/aliases.sh`.
 3. **Functions**: All `*.sh` files in `~/.kissh/functions/`.
 4. **Prompt**: The prompt specified by `$KISSH_PROMPT` from `~/.kissh/prompts/`.
 
@@ -68,18 +68,11 @@ Files in each directory are loaded in alphabetical order.
 ```
 ~/.kissh/
 ├── kissh.sh              # The main script that loads everything
-├── aliases/              # Shell aliases (*.sh)
+├── aliases.sh            # Shell aliases
 ├── functions/            # Shell functions (*.sh)
 ├── plugins/              # Setup scripts & configurations (*.sh)
 └── prompts/              # Prompts (*.sh)
 ```
-
-### `aliases`
-
-The `aliases` command helps you manage and discover your shell aliases.
-
-- **`aliases`**: List all available aliases.
-- **`aliases <search_term>`**: Search for aliases matching a specific term.
 
 ### Environment Variables
 
@@ -97,19 +90,15 @@ export AWS_SECRET_ACCESS_KEY="your_aws_secret"
 
 Make sure to add `.env_vars.sh` to your global `.gitignore` file to prevent accidentally committing it.
 
-## Documentation
-
-For a full list of available aliases and functions, see the [WIKI.md](WIKI.md) file.
-
 ## Customization
 
 Making `.kissh` your own is straightforward. Just add files to the appropriate directories.
 
 ### Aliases
 
-Create any `.sh` file in `~/.kissh/aliases/`.
+Add aliases to the `aliases.sh` file.
 
-**Example: `~/.kissh/aliases/common.sh`**
+Example
 
 ```bash
 alias ls='eza --icons' # Requires eza
