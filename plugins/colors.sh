@@ -1,5 +1,4 @@
-# First, set common aliases to enable color output
-alias ls='ls --color=auto'
+# Enable color output for common commands
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'

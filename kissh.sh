@@ -27,13 +27,16 @@ if [ -f ~/.env_vars.sh ]; then
   source ~/.env_vars.sh
 fi
 
-# Allow scroll in terminal
-tput rmcup
-
-# Editor used by CLI
+# Default editor configuration
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 
+# Load aliases with error checking
+if [ -f "$KISSH/aliases.sh" ]; then
+  source "$KISSH/aliases.sh"
+fi
 
-source "$KISSH/aliases.sh"
-source "$KISSH/shell.sh"
+# Load shell configuration with error checking
+if [ -f "$KISSH/shell.sh" ]; then
+  source "$KISSH/shell.sh"
+fi

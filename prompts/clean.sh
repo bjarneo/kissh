@@ -10,17 +10,14 @@ fi
 
 # Check if running in Zsh
 if [ -n "$ZSH_VERSION" ]; then
-  # Example: Different color for other terminals (e.g., standard green)
-  # Using tput for more robust color codes if available, otherwise direct ANSI
-  if command -v tput >/dev/null; then
-    COLOR_ICON="$(tput setaf 2)" # Green foreground
-    COLOR_RESET="$(tput sgr0)"   # Reset attributes
-  else
-    COLOR_ICON='\033[32m' # Standard green ANSI
-    COLOR_RESET='\033[0m'
-  fi
+  # Use zsh's built-in color system for better compatibility
+  autoload -U colors && colors
+  
+  # Set colors using zsh's color system
+  COLOR_ICON="%{$fg[green]%}"
+  COLOR_RESET="%{$reset_color%}"
 
-  # Set PS1 for other terminals
-  export PS1="%{$COLOR_ICON%}❯%{$COLOR_RESET%} "
+  # Set PS1 for zsh
+  export PS1="${COLOR_ICON}❯${COLOR_RESET} "
 fi
 
