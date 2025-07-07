@@ -3,9 +3,6 @@
 # Path to your custom bash framework
 export KISSH=~/.kissh
 
-source aliases.sh
-source shell.sh
-
 # Load all enabled plugins
 for plugin in ~/.kissh/plugins/*.sh; do
   if [ -f "$plugin" ]; then
@@ -36,3 +33,7 @@ tput rmcup
 # Editor used by CLI
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
+
+
+source "$KISSH/aliases.sh"
+source "$KISSH/shell.sh"
