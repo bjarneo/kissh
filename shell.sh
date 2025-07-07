@@ -1,3 +1,17 @@
+# PATH Configuration
+# Add Homebrew paths for macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Apple Silicon Macs (M1/M2)
+  if [[ -d "/opt/homebrew/bin" ]]; then
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+  fi
+  
+  # Intel Macs
+  if [[ -d "/usr/local/bin" ]]; then
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  fi
+fi
+
 # Shell completion
 # Auto completion for different systems
 if [ -n "$BASH_VERSION" ]; then
