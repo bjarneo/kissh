@@ -61,6 +61,4 @@ elif [ -n "$ZSH_VERSION" ]; then
   
   # Additional useful zsh options
   setopt AUTO_CD        # cd to directory without typing cd
-  setopt CORRECT        # Correct typos in commands
-  setopt CORRECT_ALL    # Correct typos in arguments
 fi
