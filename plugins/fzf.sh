@@ -1,4 +1,7 @@
 if command -v fzf &>/dev/null; then
+  # Save the current PATH to restore it if needed
+  ORIGINAL_PATH="$PATH"
+  
   # Try to find and source fzf completion based on common installation locations
   FZF_COMPLETION_PATHS=(
     "/usr/share/bash-completion/completions/fzf"
@@ -59,5 +62,10 @@ if command -v fzf &>/dev/null; then
         break
       fi
     done
+  fi
+  
+  # Restore PATH if it was corrupted by fzf sourcing
+  if [[ "$PATH" != *"/usr/bin"* ]] || [[ "$PATH" != *"/bin"* ]]; then
+    export PATH="$ORIGINAL_PATH"
   fi
 fi
