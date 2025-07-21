@@ -91,7 +91,7 @@ ggc() {
 If the diff is small (less than 20 lines), provide a concise, single-line commit message.
 If the diff is larger (20 lines or more), provide a more detailed message with a subject line, a blank line, and a body that explains the 'what' and 'why' of the changes.
 
-Your response should contain ONLY the raw commit message text, without any extra explanations, introductory text, or markdown formatting like backticks."
+Your response should contain ONLY the raw commit message text, without any extra explanations, introductory text, markdown formatting, or special characters."
 
   # We need to escape the diff content to safely embed it in a JSON payload.
   # 'jq -R -s .' reads the raw string (-R) as a single entity (-s) and formats it as a JSON string literal (.).
@@ -149,8 +149,9 @@ EOF
 
   # 6. Parse the response to extract the generated text
   # This version handles both single and multi-line responses gracefully.
+  # It also strips markdown and common special characters as a safeguard.
   local COMMIT_MESSAGE
-  COMMIT_MESSAGE=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed 's/^`*//;s/`*$//' | sed 's/commit: //')
+  COMMIT_MESSAGE=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed -e 's/^`*//;s/`*$//' -e 's/commit: //' -e 's/[][\\!@#$%^&*+=_{}|;:"<>,?\/`()]//g')
 
   # --- Final Output ---
 
