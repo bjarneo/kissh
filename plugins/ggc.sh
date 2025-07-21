@@ -86,7 +86,7 @@ ggc() {
   # 2. Prepare the prompt for the Gemini API
   # This enhanced prompt guides the model to select from a full range of commit types
   # and adjust message length based on diff size.
-  local PROMPT="As an expert programmer, analyze the following git diff and generate a conventional commit message. The message MUST follow the Conventional Commits specification (Angular format) and be entirely in lowercase. Choose the most appropriate type from the following list: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
+  local PROMPT="As an expert programmer, analyze the following git diff and generate a conventional commit message. The message MUST follow the Conventional Commits specification (Angular format). The commit type (e.g., 'feat', 'fix') MUST be in lowercase, but the summary and body can use normal capitalization. Choose the most appropriate type from the following list: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
 
 If the diff is small (less than 20 lines), provide a concise, single-line commit message.
 If the diff is larger (20 lines or more), provide a more detailed message with a subject line, a blank line, and a body that explains the 'what' and 'why' of the changes.
