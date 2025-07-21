@@ -84,8 +84,14 @@ ggc() {
   fi
 
   # 2. Prepare the prompt for the Gemini API
-  # The prompt instructs the model to act as an expert and return only the commit message.
-  local PROMPT="As an expert programmer, analyze the following git diff and generate a concise, single-line conventional commit message in the Angular format. The message must accurately summarize the changes. Your response should contain ONLY the raw commit message text, without any extra explanations, introductory text, or markdown formatting like backticks."
+  # This enhanced prompt guides the model to select from a full range of commit types
+  # and adjust message length based on diff size.
+  local PROMPT="As an expert programmer, analyze the following git diff and generate a conventional commit message. The message MUST follow the Conventional Commits specification (Angular format) and be entirely in lowercase. Choose the most appropriate type from the following list: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
+
+If the diff is small (less than 20 lines), provide a concise, single-line commit message.
+If the diff is larger (20 lines or more), provide a more detailed message with a subject line, a blank line, and a body that explains the 'what' and 'why' of the changes.
+
+Your response should contain ONLY the raw commit message text, without any extra explanations, introductory text, or markdown formatting like backticks."
 
   # We need to escape the diff content to safely embed it in a JSON payload.
   # 'jq -R -s .' reads the raw string (-R) as a single entity (-s) and formats it as a JSON string literal (.).
@@ -110,7 +116,7 @@ ggc() {
     "temperature": 0.4,
     "topK": 32,
     "topP": 1,
-    "maxOutputTokens": 150,
+    "maxOutputTokens": 250,
     "stopSequences": []
   },
   "safetySettings": [
@@ -142,11 +148,9 @@ EOF
   fi
 
   # 6. Parse the response to extract the generated text
-  # - We target the first candidate's content part.
-  # - 'tr -d '\n'` removes potential newlines.
-  # - 'sed 's/^`*//;s/`*$//'` removes leading/trailing backticks.
+  # This version handles both single and multi-line responses gracefully.
   local COMMIT_MESSAGE
-  COMMIT_MESSAGE=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | tr -d '\n' | sed 's/^`*//;s/`*$//' | sed 's/commit: //')
+  COMMIT_MESSAGE=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed 's/^`*//;s/`*$//' | sed 's/commit: //')
 
   # --- Final Output ---
 
@@ -160,12 +164,14 @@ EOF
   echo ""
   echo "🎉 Success! Here is your generated commit message:"
   echo ""
-  echo -e "\033[1;32m   $COMMIT_MESSAGE\033[0m" # Print message in bold green
+  # Use a different color for the message block for clarity
+  echo -e "\033[0;32m---\n${COMMIT_MESSAGE}\n---\033[0m"
   echo ""
   echo "------------------------------------------------------------------"
   echo "To use this message, first stage your files, then commit:"
   echo -e "  \033[1mgit add .\033[0m"
-  echo -e "  \033[1mgit commit -m \"$COMMIT_MESSAGE\"\033[0m"
+  # Use printf to pass the message to git commit, which handles multi-line strings correctly.
+  echo -e "  \033[1mgit commit -m \"$(printf "%s" "$COMMIT_MESSAGE")\"\033[0m"
   echo "------------------------------------------------------------------"
 }
 
